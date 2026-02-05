@@ -1,0 +1,785 @@
+:root {
+  --nav-height: 64px;
+  --accent: #00E676;
+  /* Vibrant Green */
+  --muted: #A1A1A6;
+  /* SF Pro Text Gray */
+  --card-bg: #000000;
+  /* Black for theme */
+  --bg-color: #000000;
+  /* True Black for depth */
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  /* Soft, deep shadow */
+  --text: #FFFFFF;
+  /* White text */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body,
+#root {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  /* White text */
+  background: var(--bg-color) url('./assets/landing.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  /* Tight tracking for modern feel */
+}
+
+main {
+  min-height: 100vh;
+}
+
+/* Utility containers */
+.content-page {
+  max-width: 980px;
+  /* Apple typically uses ~980px or ~1024px centered */
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  /* More breathing room */
+}
+
+@media(min-width:900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr)
+  }
+}
+
+/* Cards with Glassmorphism / iOS 26 Crystal Premium feel */
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  /* Semi-transparent white for glass effect */
+  backdrop-filter: blur(20px);
+  /* Blur the background behind */
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  /* Larger, more premium radius */
+  padding: 28px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Subtle glass border */
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  /* Lift and subtle zoom */
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  /* Slightly more opaque on hover */
+}
+
+/* Headings */
+.main-heading {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  /* Larger, bolder headings */
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+/* Navbar - Futuristic TensorStax / iOS 26 Style */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  padding-top: 20px;
+  /* spacing from top */
+  background: var(--accent);
+  /* Green background */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: flex-start;
+  /* items align to top with padding */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* subtle shadow */
+  z-index: 50;
+  transition: background 0.3s ease;
+}
+
+.nav-inner {
+  max-width: 1400px;
+  /* wider layout to fit boxes */
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Add subtle background/border to brand too if desired, keeping it clean for now */
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
+
+.brand-text {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  /* Tech feel */
+  color: #000;
+}
+
+/* Desktop links hidden on small screens */
+.nav-links {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  /* tighter gap between boxes */
+  align-items: center
+}
+
+.nav-links li {
+  display: inline-block
+}
+
+/* Boxed Nav Link Style */
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  /* Boxy padding */
+  color: #98989D;
+  /* Muted tech gray */
+  text-decoration: none;
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+
+  /* The Glass Box */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  /* Slight rounded corners, technical feel */
+  /* backdrop-filter: blur(4px);  Optional: adds blur inside the button */
+
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  /* Click effect containment */
+}
+
+/* Hover State: "Lit up" */
+.nav-link:hover {
+  color: #000;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  /* Subtle glow */
+}
+
+/* The Dot Indicator (Top Right) */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  /* White dot */
+  border-radius: 50%;
+  opacity: 0;
+  /* Hidden by default */
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 0 6px #fff;
+  /* glowing dot */
+}
+
+/* Show dot on hover */
+.nav-link:hover::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Active State: Filled or Accent */
+.nav-link.active {
+  color: #000;
+  /* Contrast text on accent */
+  background: var(--accent);
+  /* #00E676 */
+  border-color: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
+  /* Green glow */
+}
+
+.nav-link.active::after {
+  display: none;
+  /* No dot for active, the whole button is lit */
+}
+
+/* Hamburger shown on mobile */
+.hamburger {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+  display: block;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media(min-width:900px) {
+  .hamburger {
+    display: none
+  }
+
+  .nav-links {
+    display: flex
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  /* place menu below the floating navbar and inset from edges */
+  inset: 72px 16px 16px 16px;
+  padding: 24px;
+  background: rgba(28, 28, 30, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  z-index: 200; /* ensure menu appears above navbar */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Backdrop behind mobile menu to darken page content */
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.56);
+  z-index: 180;
+  backdrop-filter: blur(2px);
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 12px 0;
+  color: #F5F5F7;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-close {
+  background: none;
+  border: 0;
+  padding: 8px;
+  margin-bottom: 16px;
+  display: block;
+  color: #98989D;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Profiles & PDFs */
+.profiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px
+}
+
+@media(min-width:700px) {
+  .profiles {
+    grid-template-columns: repeat(2, 1fr)
+  }
+}
+
+.profile-card {
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pdf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px
+}
+
+.pdf-placeholder {
+  background: #2C2C2E;
+  padding: 16px;
+  border-radius: 12px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.pdf-placeholder:hover {
+  background: #3A3A3C;
+  transform: translateX(4px);
+}
+
+/* Stadium black placeholders */
+.black-placeholder {
+  background: #000;
+  height: 140px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Misc */
+.card-name {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+}
+
+.card-achievement {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Wall of Fame specific text color */
+.content-page .card .card-name,
+.content-page .card .card-achievement {
+  color: #000000;
+}
+
+/* Landing hero styles (mobile-first, responsive) */
+.landing-hero {
+  /* Use body wallpaper as the persistent background. Keep hero full-height but non-fixed
+     so background stays consistent across pages and doesn't conflict with mobile rendering. */
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 0;
+}
+
+/* gradient overlay: fully transparent at the very top so navbar reads crystal-clear */
+.landing-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.00) 0%,
+      rgba(0, 0, 0, 0.14) 30%,
+      rgba(0, 0, 0, 0.6) 100%);
+  mix-blend-mode: normal;
+}
+
+/* (handled in consolidated .landing-hero above) */
+
+/* ensure content below hero is reachable and not clipped */
+.landing-content{ padding-bottom: 140px; }
+
+/* make sure the hero image extends behind the fixed navbar by reducing internal top padding */
+/* Removed padding-top to start hero at top for navbar overlay */
+
+/* hero animation and ken-burns effect (applied in consolidated .landing-hero) */
+
+/* give hero content extra top spacing so it doesn't sit directly under the navbar */
+.landing-content{ padding-top: 48px; }
+
+@keyframes hero-zoom{
+  0% { background-size: 110%; }
+  50% { background-size: 122%; }
+  100% { background-size: 110%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .landing-hero{ animation: none; }
+}
+
+/* reduce top padding on small screens */
+@media (max-width: 600px){
+  /* Removed padding-top to start hero at top on mobile */
+}
+
+/* Theme section that appears below the hero */
+.theme-section{
+  padding: 72px 24px;
+  background: var(--bg-color);
+  color: var(--text);
+}
+
+.theme-card{
+  max-width: 980px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  padding: 36px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.06);
+}
+
+.theme-card h2{ margin-top: 0; font-size: 1.6rem; color: #000; }
+
+.theme-card p{ color: #000; line-height: 1.6; }
+
+/* blur/wash overlay: softened for a subtler hero (less intense wash) */
+.landing-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.035);
+  /* Softer blur for premium, crystal look */
+  backdrop-filter: blur(1.8px) saturate(105%);
+  /* Softer blur for WebKit */
+  -webkit-backdrop-filter: blur(1.8px) saturate(105%);
+  transition: backdrop-filter 240ms ease, background 240ms ease;
+} 
+
+/* content sits above overlays */
+.landing-content {
+  position: absolute;
+  top: 140px;
+  left: 40px;
+  transform: none;
+  z-index: 3;
+  max-width: 600px;
+  width: calc(100% - 80px);
+  color: #fff;
+  text-align: left;
+  animation: fadeIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fine tuned responsive scaling (adjust if your design needs exact font sizes) */
+.landing-content .main-heading {
+  margin: 0 0 8px 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.landing-content .subtitle {
+  margin: 0;
+  color: #6b6b6b;
+  font-size: clamp(1rem, 2.6vw, 1.05rem);
+}
+
+/* make sure the hero uses less vertical real estate on small screens */
+@media (max-width: 600px) {
+  /* Mobile: use scroll attachment to avoid iOS/Android rendering issues and crop from top */
+  body {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+
+  .landing-hero {
+    min-height: 100vh;
+    padding-top: 56px;
+    padding-bottom: 28px;
+  }
+
+  .landing-blur {
+    backdrop-filter: blur(2px) saturate(104%);
+    -webkit-backdrop-filter: blur(2px) saturate(104%);
+    background: rgba(0,0,0,0.04);
+  }
+}
+
+/* WhySportsDay: background blur and improved text visibility */
+.why-bg-blur {
+  filter: blur(4px) brightness(0.62) saturate(0.95);
+  transform: scale(1.03);
+  will-change: filter, transform;
+}
+
+.why-content {
+  color: #FFFFFF;
+  font-size: 1.125rem; /* ~18px */
+  line-height: 1.8;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 1;
+}
+
+.why-content h2 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: 12px;
+}
+
+@media (min-width: 900px) {
+  .why-content {
+    font-size: 1.15rem;
+  }
+}
+
+/* Behind the Scenes Page - Premium Netflix-like Grid */
+.behind-scenes-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  background: transparent;
+  color: #F5F5F7;
+}
+
+.behind-scenes-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.behind-scenes-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.behind-scenes-subtitle {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin: 0;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.video-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+
+.video-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.video-placeholder:hover {
+  transform: scale(1.05);
+}
+
+.video-thumbnail iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 20px;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 20px;
+}
+
+.video-card:hover .video-overlay {
+  opacity: 1;
+}
+
+.play-button {
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover .play-button {
+  transform: scale(1.1);
+}
+
+.video-info {
+  text-align: center;
+  color: white;
+}
+
+.video-info h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.video-info p {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Behind the Scenes Hero */
+.behind-hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  isolation: isolate;
+  margin-bottom: 60px;
+}
+
+.behind-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.7) 100%);
+  mix-blend-mode: normal;
+}
+
+.behind-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px) saturate(110%);
+  -webkit-backdrop-filter: blur(2px) saturate(110%);
+  transition: backdrop-filter 240ms ease, background 240ms ease;
+}
+
+.behind-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1024px;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.behind-scenes-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #F5F5F7 0%, #D1D1D6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.behind-scenes-subtitle {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin: 0;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+}

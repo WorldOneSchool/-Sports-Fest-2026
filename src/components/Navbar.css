@@ -1,0 +1,247 @@
+/* Navbar.css
+   Premium, crystal-clear iOS 26 inspired navbar styles
+   - Glassmorphism with blur/backdrop-filter
+   - Subtle borders, soft shadows, crisp typography
+   - Responsive: shows hamburger on small screens
+   - Accessibility: focus-visible and reduced motion support
+*/
+
+:root{
+  --nav-bg: rgba(255,255,255,0.64);
+  --nav-bg-2: rgba(255,255,255,0.54);
+  --nav-blur: 12px;
+  --nav-border: rgba(15,20,25,0.06);
+  --accent: 10,132,255; /* iOS blue as rgb for ease */
+  --accent-color: rgba(var(--accent),1);
+  --text: rgba(16,20,24,0.92);
+  --muted: rgba(16,20,24,0.44);
+  --glass-shadow: 0 8px 30px rgba(16,20,24,0.06);
+}
+
+/* Container - floating frosted bar */
+.site-nav.premium-navbar{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  top: 12px;
+  z-index: 80;
+  max-width: calc(100% - 24px);
+  margin: 0 auto;
+  border-radius: 14px;
+  -webkit-backdrop-filter: blur(var(--nav-blur));
+  backdrop-filter: blur(var(--nav-blur)) saturate(1.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+  border: 1px solid rgba(16,20,24,0.04);
+  box-shadow: 0 8px 28px rgba(2,6,23,0.28);
+  transition: background 220ms ease, box-shadow 220ms ease, transform 180ms ease;
+  padding: 8px 12px;
+}
+
+/* scrolled: more visible glass when user scrolls */
+.site-nav.premium-navbar.scrolled{
+  background: linear-gradient(180deg, rgba(255,255,255,0.76), rgba(255,255,255,0.66));
+  border: 1px solid var(--nav-border);
+  box-shadow: 0 14px 40px rgba(2,6,23,0.16);
+  transform: translateY(-2px);
+}
+
+/* When at very top keep it ultra-clean (no pronounced shadow) — crystal clear */
+.site-nav.premium-navbar:not(.scrolled){
+  background: transparent; /* fully let the image show through */
+  border: 1px solid rgba(255,255,255,0.02);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(22px) saturate(1.08);
+  backdrop-filter: blur(22px) saturate(1.08);
+}
+
+/* Make nav text/pills readable when the navbar is transparent (top) */
+.site-nav.premium-navbar:not(.scrolled) .brand-text,
+.site-nav.premium-navbar:not(.scrolled) .nav-link.premium-nav-link{
+  color: rgba(0, 0, 0, 0.95);
+}
+
+.site-nav.premium-navbar:not(.scrolled) .nav-link.premium-nav-link{
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: inset 0 -1px 0 rgba(255,255,255,0.03);
+}
+
+/* Active pill in top state: maintain strong contrast */
+.site-nav.premium-navbar:not(.scrolled) .nav-link.premium-nav-link.active{
+  color: #526cf1;
+  background: linear-gradient(180deg, rgba(var(--accent),1), rgba(0,140,255,0.92));
+  box-shadow: 0 8px 22px rgba(10,132,255,0.14), inset 0 -1px 0 rgba(255,255,255,0.06);
+}
+
+/* Hamburger & logo contrast */
+.site-nav.premium-navbar:not(.scrolled) .hamburger.premium-hamburger svg rect{
+  fill: rgba(255,255,255,0.95);
+}
+.site-nav.premium-navbar:not(.scrolled) .logo.premium-logo{
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.45));
+  background: rgba(255,255,255,0.06);
+}
+
+/* compact variant for very small screens */
+@media (max-width: 520px){
+  .site-nav.premium-navbar{
+    left: 8px;
+    right: 8px;
+    border-radius: 12px;
+  }
+}
+
+.nav-inner.premium-nav-inner{
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 20px;
+}
+
+/* Brand */
+.brand.premium-brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo.premium-logo{
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(16,20,24,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.62));
+  padding: 4px;
+}
+
+.brand-text.premium-brand-text{
+  font-weight: 600;
+  color: var(--text);
+  font-size: 15px;
+  letter-spacing: 0.1px;
+}
+
+/* Links */
+.nav-links.premium-nav-links{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links.premium-nav-links li{
+  margin: 0;
+}
+
+.nav-link.premium-nav-link{
+  --pad-v: 8px;
+  --pad-h: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--pad-v) var(--pad-h);
+  border-radius: 12px;
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 160ms ease, background 160ms ease, transform 150ms ease;
+}
+
+.nav-link.premium-nav-link:hover,
+.nav-link.premium-nav-link:focus{
+  color: var(--text);
+  background: rgba(var(--accent), 0.06);
+  transform: translateY(-1px);
+}
+
+.nav-link.premium-nav-link:focus{
+  outline: 3px solid rgba(var(--accent), 0.12);
+  outline-offset: 3px;
+}
+
+/* Active link = subtle pill + color */
+.nav-link.premium-nav-link.active{
+  color: var(--accent-color);
+  background: linear-gradient(180deg, rgba(var(--accent),0.09), rgba(var(--accent),0.04));
+  box-shadow: inset 0 -1px 0 rgba(var(--accent), 0.06);
+}
+
+.nav-link.premium-nav-link.active::after{
+  content: "";
+  display: block;
+  height: 3px;
+  width: 32%;
+  border-radius: 10px;
+  margin: 6px auto 0;
+  background: linear-gradient(90deg, rgba(var(--accent),1), rgba(0,170,255,0.65));
+}
+
+/* Hamburger - visible on small screens */
+.hamburger.premium-hamburger{
+  display: none;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(16,20,24,0.04);
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger.premium-hamburger svg rect{
+  fill: var(--text);
+  transition: fill 150ms ease;
+}
+
+.hamburger.premium-hamburger:focus{
+  outline: 3px solid rgba(var(--accent), 0.12);
+  outline-offset: 3px;
+}
+
+/* Responsive: Hide nav links and show hamburger */
+@media (max-width: 880px){
+  .nav-links.premium-nav-links{
+    display: none;
+  }
+  .hamburger.premium-hamburger{
+    display: inline-flex;
+  }
+}
+
+/* Motion reduced */
+@media (prefers-reduced-motion: reduce){
+  .nav-link.premium-nav-link,
+  .site-nav.premium-navbar,
+  .hamburger.premium-hamburger{
+    transition: none !important;
+    will-change: auto !important;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark){
+  :root{
+    --nav-bg: rgba(8,10,12,0.42);
+    --nav-bg-2: rgba(8,10,12,0.34);
+    --nav-border: rgba(255,255,255,0.04);
+    --text: rgba(245,246,247,0.94);
+    --muted: rgba(245,246,247,0.64);
+    --glass-shadow: 0 8px 34px rgba(0,0,0,0.6);
+  }
+  .logo.premium-logo{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  }
+}
+
+/* Small visual polish */
+.site-nav.premium-navbar:has(.nav-links.premium-nav-links li .nav-link.active){
+  /* subtle glow when someone is on a page */
+  box-shadow: 0 12px 40px rgba(10,132,255,0.03);
+}
